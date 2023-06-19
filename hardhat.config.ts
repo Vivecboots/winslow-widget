@@ -3,6 +3,8 @@ import "hardhat-deploy";
 import "hardhat-deploy-ethers";
 import "@nomiclabs/hardhat-ethers";
 import "@nomicfoundation/hardhat-toolbox";
+import "@debridge-finance/hardhat-debridge";
+import { evm } from "@debridge-finance/desdk";
 
 import faucet from "./tasks/faucet";
 
