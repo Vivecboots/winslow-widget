@@ -10,7 +10,6 @@ export default function Dapp() {
   const [transferAmount, setTransferAmout] = useState<string>("0");
   const addRecentTransaction = useAddRecentTransaction();
 
-
   const onRecipientAddressChange = (e: ChangeEvent<HTMLInputElement>) => {
     setReceiverAddress(e.target.value);
   }
@@ -42,8 +41,23 @@ export default function Dapp() {
   }, [data, isSuccess])
 
   return (
-    <div className='bg-slate-900 h-screen flex justify-center items-center'>
-      <div className='bg-slate-800 w-3/6 h-min py-12 px-24 rounded-2xl flex flex-col'>
+    <div className='relative bg-slate-900 h-screen flex justify-center items-center'>
+  <video
+    autoPlay
+    loop
+    muted
+    className="absolute w-auto min-w-full min-h-full max-w-none z-0"
+    src="/black_-_13495 (540p).mp4"
+    // @ts-ignore
+    playbackrate={3.0} // Adjust this value to slow down or speed up the video
+  />
+
+
+
+
+
+
+      <div className='relative z-10 bg-slate-800 w-3/6 h-min py-12 px-24 rounded-2xl flex flex-col'>
         <h2 className='text-white font-bold text-4xl text-center mb-8'>
           Transfer Example
         </h2>
