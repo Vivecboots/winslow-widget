@@ -1,14 +1,21 @@
-import { ChangeEvent, useEffect, useState } from 'react';
-
+import { ChangeEvent, useEffect, useState, useRef } from 'react';
 import { useAddRecentTransaction } from '@rainbow-me/rainbowkit';
 import { useSendTransaction, usePrepareSendTransaction } from 'wagmi';
-
 import { parseEther } from 'ethers/lib/utils.js';
 
 export default function Dapp() {
+  // Existing state variables
   const [receiverAddress, setReceiverAddress] = useState<string>("");
   const [transferAmount, setTransferAmout] = useState<string>("0");
+
+  // New state variables
+  const [userNonce, setUserNonce] = useState<number>(0);
+  const [maxPrice, setMaxPrice] = useState<number>(0);
+  const [timeLimit, setTimeLimit] = useState<number>(0);
+  const [tokenType, setTokenType] = useState<string>('');
+
   const addRecentTransaction = useAddRecentTransaction();
+  const videoRef = useRef<HTMLVideoElement>(null); // Create a reference to the video element
 
   const onRecipientAddressChange = (e: ChangeEvent<HTMLInputElement>) => {
     setReceiverAddress(e.target.value);
@@ -16,6 +23,23 @@ export default function Dapp() {
 
   const onTransferAmountChange = ( e: ChangeEvent<HTMLInputElement>) => {
     setTransferAmout(e.target.value);
+  }
+
+  // New event handlers
+  const onUserNonceChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setUserNonce(Number(e.target.value));
+  }
+
+  const onMaxPriceChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setMaxPrice(Number(e.target.value));
+  }
+
+  const onTimeLimitChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setTimeLimit(Number(e.target.value));
+  }
+
+  const onTokenTypeChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setTokenType(e.target.value);
   }
 
   const { config, error } = usePrepareSendTransaction({
@@ -38,35 +62,32 @@ export default function Dapp() {
         description: "Send Transaction",
       });
     }
-  }, [data, isSuccess])
+    if (videoRef.current) {
+      videoRef.current.playbackRate = 0.75; // Set the playback speed
+    }
+  }, [data, isSuccess]);
 
   return (
     <div className='relative bg-slate-900 h-screen flex justify-center items-center'>
-  <video
-    autoPlay
-    loop
-    muted
-    className="absolute w-auto min-w-full min-h-full max-w-none z-0"
-    src="/black_-_13495 (540p).mp4"
-    // @ts-ignore
-    playbackrate={3.0} // Adjust this value to slow down or speed up the video
-  />
-
-
-
-
-
-
+      <video
+        ref={videoRef} // Attach the reference to the video element
+        autoPlay
+        loop
+        muted
+        className="absolute w-auto min-w-full min-h-full max-w-none z-0"
+        src="/black_-_13495 (540p).mp4"
+      />
       <div className='relative z-10 bg-slate-800 w-3/6 h-min py-12 px-24 rounded-2xl flex flex-col'>
         <h2 className='text-white font-bold text-4xl text-center mb-8'>
-          Transfer Example
+          Safi-Bridge/Winslow-Widget
         </h2>
         <form> 
+          {/* Existing form fields */}
           <label
             htmlFor='receiver'
             className="text-neutral-300 font-light text-md block mb-2 text-sm font-medium"
           >
-            First name
+First name
           </label>
           <input
             id='receiver'
@@ -90,6 +111,55 @@ export default function Dapp() {
             className='bg-slate-800 text-neutral-200 px-2 py-1 w-full text-lg outline-0 border-b mb-4 border-slate-600 appearance-none'
             onChange={onTransferAmountChange}
             value={transferAmount}
+          />
+
+          {/* New form fields */}
+          <label htmlFor='userNonce' className="text-neutral-300 font-light text-md block mb-2 text-sm font-medium">
+            User Nonce
+          </label>
+          <input
+            id='userNonce'
+            type='number'
+            placeholder='0'
+            className='bg-slate-800 text-neutral-200 px-2 py-1 w-full text-lg outline-0 border-b mb-4 border-slate-600 appearance-none'
+            onChange={onUserNonceChange}
+            value={userNonce}
+          />
+
+          <label htmlFor='maxPrice' className="text-neutral-300 font-light text-md block mb-2 text-sm font-medium">
+            Max Price
+          </label>
+          <input
+            id='maxPrice'
+            type='number'
+            placeholder='0'
+            className='bg-slate-800 text-neutral-200 px-2 py-1 w-full text-lg outline-0 border-b mb-4 border-slate-600 appearance-none'
+            onChange={onMaxPriceChange}
+            value={maxPrice}
+          />
+
+          <label htmlFor='timeLimit' className="text-neutral-300 font-light text-md block mb-2 text-sm font-medium">
+            Time Limit
+          </label>
+          <input
+            id='timeLimit'
+            type='number'
+            placeholder='0'
+            className='bg-slate-800 text-neutral-200 px-2 py-1 w-full text-lg outline-0 border-b mb-4 border-slate-600 appearance-none'
+            onChange={onTimeLimitChange}
+            value={timeLimit}
+          />
+
+          <label htmlFor='tokenType' className="text-neutral-300 font-light text-md block mb-2 text-sm font-medium">
+            Token Type
+          </label>
+          <input
+            id='tokenType'
+            type='text'
+            placeholder='Token Type'
+            className='bg-slate-800 text-neutral-200 px-2 py-1 w-full text-lg outline-0 border-b mb-4 border-slate-600 appearance-none'
+            onChange={onTokenTypeChange}
+            value={tokenType}
           />
         </form>
         { error && (
