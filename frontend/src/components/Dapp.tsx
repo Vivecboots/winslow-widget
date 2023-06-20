@@ -3,6 +3,9 @@ import { useAddRecentTransaction } from '@rainbow-me/rainbowkit';
 import { useSendTransaction, usePrepareSendTransaction } from 'wagmi';
 import { parseEther } from 'ethers/lib/utils.js';
 
+
+
+
 export default function Dapp() {
   const [receiverAddress, setReceiverAddress] = useState<string>("");
   const [transferAmount, setTransferAmout] = useState<string>("0");
@@ -63,8 +66,46 @@ export default function Dapp() {
     }
   }, [data, isSuccess]);
 
+  const FormComponent1 = () => (
+    <div className='relative z-10b bg-blue-900 w-3/6 h-min py-12 px-24 rounded-2xl flex flex-col'>
+      <img src="/My_project-1_(2).png" alt="Image 1" style={{ width: '70px', height: '70px', position: 'absolute', top: 0, left: 0 }} />
+      <h1>Form 1</h1>
+      {/* Form fields for Form 1 */}
+      <form>
+        <input type="text" name="name" placeholder="Name" />
+        <input type="email" name="email" placeholder="Email" />
+        <button>Submit Form 1</button>
+      </form>
+    </div>
+  );
+  
+  const FormComponent2 = () => (
+    <div className='relative z-10 bg-slate-800 w-3/6 h-min py-12 px-24 rounded-2xl flex flex-col'>
+      <img src="/My_project-1_(4).png" alt="Image 2" style={{ width: '70px', height: '70px', position: 'absolute', top: 0, left: 0 }}  />
+      <h1>Form 2</h1>
+      {/* Form fields for Form 2 */}
+      <form>
+        <input type="text" name="username" placeholder="Username" />
+        <input type="password" name="password" placeholder="Password" />
+        <button>Submit Form 2</button>
+      </form>
+    </div>
+  );
+  
+  
+  const FormComponent3 = () => (
+    <div className='relative z-10 bg-slate-800 w-3/6 h-min py-12 px-24 rounded-2xl flex flex-col'>
+      <h1>Form 3</h1>
+      {/* Form fields for Form 3 */}
+      <form>
+        {/* Add your form fields here */}
+        <button>Submit Form 3</button>
+      </form>
+    </div>
+  );
+  
   return (
-    <div className='relative bg-slate-900 h-screen flex justify-center items-center'>
+    <div className='relative bg-slate-900 h-screen flex justify-center items-center flex-col space-y-50'>
       <video
         ref={videoRef}
         autoPlay
@@ -73,118 +114,21 @@ export default function Dapp() {
         className="absolute w-auto min-w-full min-h-full max-w-none z-0"
         src="/black_-_13495 (540p).mp4"
       />
-      <div className='relative z-10 bg-slate-800 w-3/6 h-min py-12 px-24 rounded-2xl flex flex-col'>
-        <div className="flex flex-col items-center mb-24">
-          <h1 className="text-6xl text-gray-400 " style={{ fontFamily: "fantasy" }} >
-            Safi-Bridge<span className="bg-gradient-to-r from-blue-300 to-purple-600 bg-clip-text text-transparent">/Winslow-Widget</span>
-          </h1>
-          <p className="text-lg">
-            {" "}
-            <span className="bg-purple-500 text-white px-4 py-1 rounded-md ml-2">Community Batched Cross-Chain [l2>L1>L2] Limit Orders With Integrated Token Wrapping</span>
-          </p>
-        </div>
+      <FormComponent1 />
+      <button className="rounded-full p-4 bg-blue-500 text-white relative z-10">
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="h-6 w-6 mx-auto">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+  </svg>
+</button>
 
 
-        <form> 
-          {/* Existing form fields */}
-          <label
-            htmlFor='receiver'
-            className="text-neutral-300 font-light text-md block mb-2 text-sm font-medium"
-          >
-First name
-          </label>
-          <input
-            id='receiver'
-            type='text'
-            placeholder='Receiver address'
-            className='bg-slate-800 px-2 py-1 w-full text-lg outline-0 border-b mb-4 border-slate-600 text-neutral-200 appearance-none'
-            onChange={onRecipientAddressChange}
-            value={receiverAddress}
-          />
-          <label
-            htmlFor='transferAmount'
-            className="text-neutral-300 font-light text-md block mb-2 text-sm font-medium"
-          >
-            Transfer Amount
-          </label>
-          <input
-            id='transferAmount'
-            type="number"
-            step="0.1"
-            placeholder='0'
-            className='bg-slate-800 text-neutral-200 px-2 py-1 w-full text-lg outline-0 border-b mb-4 border-slate-600 appearance-none'
-            onChange={onTransferAmountChange}
-            value={transferAmount}
-          />
-
-          {/* New form fields */}
-          <label htmlFor='userNonce' className="text-neutral-300 font-light text-md block mb-2 text-sm font-medium">
-            User Nonce
-          </label>
-          <input
-            id='userNonce'
-            type='number'
-            placeholder='0'
-            className='bg-slate-800 text-neutral-200 px-2 py-1 w-full text-lg outline-0 border-b mb-4 border-slate-600 appearance-none'
-            onChange={onUserNonceChange}
-            value={userNonce}
-          />
-
-          <label htmlFor='maxPrice' className="text-neutral-300 font-light text-md block mb-2 text-sm font-medium">
-            Max Price
-          </label>
-          <input
-            id='maxPrice'
-            type='number'
-            placeholder='0'
-            className='bg-slate-800 text-neutral-200 px-2 py-1 w-full text-lg outline-0 border-b mb-4 border-slate-600 appearance-none'
-            onChange={onMaxPriceChange}
-            value={maxPrice}
-          />
-
-          <label htmlFor='timeLimit' className="text-neutral-300 font-light text-md block mb-2 text-sm font-medium">
-            Time Limit
-          </label>
-          <input
-            id='timeLimit'
-            type='number'
-            placeholder='0'
-            className='bg-slate-800 text-neutral-200 px-2 py-1 w-full text-lg outline-0 border-b mb-4 border-slate-600 appearance-none'
-            onChange={onTimeLimitChange}
-            value={timeLimit}
-          />
-
-          <label htmlFor='tokenType' className="text-neutral-300 font-light text-md block mb-2 text-sm font-medium">
-            Token Type
-          </label>
-          <input
-            id='tokenType'
-            type='text'
-            placeholder='Token Type'
-            className='bg-slate-800 text-neutral-200 px-2 py-1 w-full text-lg outline-0 border-b mb-4 border-slate-600 appearance-none'
-            onChange={onTokenTypeChange}
-            value={tokenType}
-          />
-        </form>
-        { error && (
-          <div className='text-red-600'>
-            An error occurred preparing the transaction: {error.message}
-          </div>
-        )}
-
-        <button
-          className='font-bold text-white bg-indigo-600 mt-4 self-center px-8 py-4 rounded-full disabled:opacity-75'
-          disabled={!sendTransaction || isLoading}
-          onClick={handleSendTransaction}
-        >
-          Confirm Transfer
-        </button>
 
 
-       
-      
-      </div>
 
+
+      <FormComponent2 />
+      <div style={{ height: '20px' }} />
+      <FormComponent3 />
     </div>
-  )
+  );
 }
