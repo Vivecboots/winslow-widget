@@ -4,18 +4,15 @@ import { useSendTransaction, usePrepareSendTransaction } from 'wagmi';
 import { parseEther } from 'ethers/lib/utils.js';
 
 export default function Dapp() {
-  // Existing state variables
   const [receiverAddress, setReceiverAddress] = useState<string>("");
   const [transferAmount, setTransferAmout] = useState<string>("0");
-
-  // New state variables
   const [userNonce, setUserNonce] = useState<number>(0);
   const [maxPrice, setMaxPrice] = useState<number>(0);
   const [timeLimit, setTimeLimit] = useState<number>(0);
   const [tokenType, setTokenType] = useState<string>('');
 
   const addRecentTransaction = useAddRecentTransaction();
-  const videoRef = useRef<HTMLVideoElement>(null); // Create a reference to the video element
+  const videoRef = useRef<HTMLVideoElement>(null);
 
   const onRecipientAddressChange = (e: ChangeEvent<HTMLInputElement>) => {
     setReceiverAddress(e.target.value);
@@ -25,7 +22,6 @@ export default function Dapp() {
     setTransferAmout(e.target.value);
   }
 
-  // New event handlers
   const onUserNonceChange = (e: ChangeEvent<HTMLInputElement>) => {
     setUserNonce(Number(e.target.value));
   }
@@ -63,14 +59,14 @@ export default function Dapp() {
       });
     }
     if (videoRef.current) {
-      videoRef.current.playbackRate = 0.75; // Set the playback speed
+      videoRef.current.playbackRate = 0.75;
     }
   }, [data, isSuccess]);
 
   return (
     <div className='relative bg-slate-900 h-screen flex justify-center items-center'>
       <video
-        ref={videoRef} // Attach the reference to the video element
+        ref={videoRef}
         autoPlay
         loop
         muted
@@ -78,9 +74,17 @@ export default function Dapp() {
         src="/black_-_13495 (540p).mp4"
       />
       <div className='relative z-10 bg-slate-800 w-3/6 h-min py-12 px-24 rounded-2xl flex flex-col'>
-        <h2 className='text-white font-bold text-4xl text-center mb-8'>
-          Safi-Bridge/Winslow-Widget
-        </h2>
+        <div className="flex flex-col items-center mb-24">
+          <h1 className="text-6xl text-gray-400 " style={{ fontFamily: "fantasy" }} >
+            Safi-Bridge<span className="bg-gradient-to-r from-blue-300 to-purple-600 bg-clip-text text-transparent">/Winslow-Widget</span>
+          </h1>
+          <p className="text-lg">
+            {" "}
+            <span className="bg-purple-500 text-white px-4 py-1 rounded-md ml-2">Community Batched Cross-Chain [l2>L1>L2] Limit Orders With Integrated Token Wrapping</span>
+          </p>
+        </div>
+
+
         <form> 
           {/* Existing form fields */}
           <label
@@ -175,7 +179,12 @@ First name
         >
           Confirm Transfer
         </button>
+
+
+       
+      
       </div>
+
     </div>
   )
 }
