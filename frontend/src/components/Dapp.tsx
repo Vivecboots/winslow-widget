@@ -3,6 +3,9 @@ import { useAddRecentTransaction } from '@rainbow-me/rainbowkit';
 import { useSendTransaction, usePrepareSendTransaction } from 'wagmi';
 import { parseEther } from 'ethers/lib/utils.js';
 import Head from 'next/head';
+import ButtonGroup from '@mui/material/ButtonGroup';
+import Button from '@mui/material/Button';
+import zIndex from '@mui/material/styles/zIndex';
 
 
 
@@ -63,50 +66,62 @@ export default function Dapp() {
       });
     }
     if (videoRef.current) {
-      videoRef.current.playbackRate = 0.75;
+      videoRef.current.playbackRate = .5;
     }
   }, [data, isSuccess]);
 
-  const FormComponent1 = () => (
-    <div className='relative z-10 bg-blue-900 w-3/6 h-min py-12 px-24 rounded-2xl flex flex-col'>
-      <img src="/My_project-1_(2).png" alt="Image 1" style={{ width: '70px', height: '70px', position: 'absolute', top: 0, left: 0 }} />
-      <h1>Form 1 BOA</h1>
-      {/* Form fields for Form 1 */}
-      <form>
-        <input
-          type="text"
-          name="Deposit Address"
-          placeholder="Deposit Address"
-          value={receiverAddress}
-          onChange={onRecipientAddressChange}
-        />
-        <div className='flex space-x-4'>
-          <select
-            name="Deposit Token"
-            value={tokenType}
-            onChange={onTokenTypeChange}
-          >
-            {/* Your options here */}
-            <option value="token1">Token 1</option>
-            <option value="token2">Token 2</option>
-          </select>
+  const FormComponent1 = () => {
+    const buttons = [
+      <Button key="token1" onClick={() => setTokenType('token1')}>USDC</Button>,
+      <Button key="token2" onClick={() => setTokenType('token2')}>Tether</Button>,
+      <Button key="token3" onClick={() => setTokenType('token2')}>WETH</Button>,
+    ];
+  
+    return (
+      <div className='relative z-10 bg-blue-900 w-3/6 h-min py-12 px-24 rounded-2xl flex flex-col'>
+        <img src="/My_project-1_(2).png" alt="Image 1" style={{ width: '85px', height: '85px', position: 'absolute', top: 0, left: 0 }} />
+        <h1>Form 1 BOA</h1>
+        {/* Form fields for Form 1 */}
+        <form>
           <input
             type="text"
-            name="Deposit Amount"
-            placeholder="Deposit Amount"
-            value={transferAmount}
-            onChange={onTransferAmountChange}
+            name="Deposit Address"
+            placeholder="Deposit Address"
+            value={receiverAddress}
+            onChange={onRecipientAddressChange}
+            style={{ width: '100%' }} // Make input field long
+            maxLength={42} // Restrict input to 42 characters
           />
-        </div>
-        <button>Submit Form 1</button>
-      </form>
-    </div>
-  );
+          <div className='flex space-x-4'>
+           
+
+
+            <ButtonGroup
+  disableElevation
+  variant="contained"
+  aria-label="Disabled elevation buttons"
+> {buttons}
+            </ButtonGroup>
+
+
+            <input
+              type="text"
+              name="Deposit Amount"
+              placeholder="Deposit Amount"
+              value={transferAmount}
+              onChange={onTransferAmountChange}
+            />
+          </div>
+          <button>Submit Form 1</button>
+        </form>
+      </div>
+    );
+  }
   
   
   const FormComponent2 = () => (
     <div className='relative z-10 bg-slate-800 w-3/6 h-min py-12 px-24 rounded-2xl flex flex-col'>
-      <img src="/My_project-1_(4).png" alt="Image 2" style={{ width: '70px', height: '70px', position: 'absolute', top: 0, left: 0 }}  />
+      <img src="/My_project-1_(4).png" alt="Image 2" style={{ width: '85px', height: '85px', position: 'absolute', top: 0, left: 0 }}  />
       <h1>Form 2</h1>
       {/* Form fields for Form 2 */}
       <form>
@@ -128,7 +143,7 @@ export default function Dapp() {
   
   const FormComponent3 = () => (
     <div className='relative z-10  bg-blue-900 w-3/6 h-min py-12 px-24 rounded-2xl flex flex-col'>
-      <img src="/My_project-1_(2).png" alt="Image 1" style={{ width: '70px', height: '70px', position: 'absolute', top: 0, left: 0 }} />
+      <img src="/My_project-1_(2).png" alt="Image 1" style={{ width: '85px', height: '85px', position: 'absolute', top: 0, left: 0 }} />
       <h1>Form 3</h1>
       {/* Form fields for Form 3 */}
       <form>
@@ -152,7 +167,12 @@ export default function Dapp() {
           }
         `}</style>
       </Head>
-      <h1 style={{ fontFamily: "'SD Glitch 2'", fontSize: '8em', color: '#d90bc8', position: 'relative', zIndex: 1 }}>safi-bridge</h1>
+      
+      <div style={{ backgroundColor: 'rgba(0, 0, 30, 1)', padding: '20px', borderRadius: '10px', width: '50%', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', zIndex: 10 }}>
+  <h1 style={{ fontFamily: "'SD Glitch 2'", fontSize: '8em', color: '#fc03ce', position: 'relative', zIndex: 11 }}>safi-bridge</h1>
+  <h3 style={{ fontFamily: "'Roboto'", fontSize: '1.5em', color: 'white', position: 'relative', zIndex: 1 }}>Bacthed Multi-Chain Limit-Order Bridge</h3>
+</div>
+
 
       <video
         ref={videoRef}
@@ -160,7 +180,7 @@ export default function Dapp() {
         loop
         muted
         className="absolute w-auto min-w-full min-h-full max-w-none z-0"
-        src="/black_-_13495 (540p).mp4"
+        src="/circuit_-_39350_(1440p).mp4"
       />
       <FormComponent1 />
       <BlueButton />
