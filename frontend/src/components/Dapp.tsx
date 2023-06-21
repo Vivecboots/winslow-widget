@@ -66,7 +66,7 @@ export default function Dapp() {
       });
     }
     if (videoRef.current) {
-      videoRef.current.playbackRate = .5;
+      videoRef.current.playbackRate = 1;
     }
   }, [data, isSuccess]);
 
@@ -168,9 +168,9 @@ export default function Dapp() {
         `}</style>
       </Head>
       
-      <div style={{ backgroundColor: 'rgba(0, 0, 30, 1)', padding: '20px', borderRadius: '10px', width: '50%', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', zIndex: 10 }}>
-  <h1 style={{ fontFamily: "'SD Glitch 2'", fontSize: '8em', color: '#fc03ce', position: 'relative', zIndex: 11 }}>safi-bridge</h1>
-  <h3 style={{ fontFamily: "'Roboto'", fontSize: '1.5em', color: 'white', position: 'relative', zIndex: 1 }}>Bacthed Multi-Chain Limit-Order Bridge</h3>
+      <div style={{ backgroundColor: 'rgba(0, 0, 0, 0)', padding: '20px', borderRadius: '10px', width: '50%', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', zIndex: 10 }}>
+  <h1 style={{ fontFamily: "'SD Glitch 2'", fontSize: '8em', color: '#fc03ce', position: 'relative', zIndex: 11 }}>Supra-Bridge</h1>
+ 
 </div>
 
 
@@ -180,7 +180,7 @@ export default function Dapp() {
         loop
         muted
         className="absolute w-auto min-w-full min-h-full max-w-none z-0"
-        src="/circuit_-_39350_(1440p).mp4"
+        src="/yo.mp4"
       />
       <FormComponent1 />
       <BlueButton />
