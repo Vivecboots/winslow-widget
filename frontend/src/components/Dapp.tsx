@@ -2,6 +2,7 @@ import { ChangeEvent, useEffect, useState, useRef } from 'react';
 import { useAddRecentTransaction } from '@rainbow-me/rainbowkit';
 import { useSendTransaction, usePrepareSendTransaction } from 'wagmi';
 import { parseEther } from 'ethers/lib/utils.js';
+import Head from 'next/head';
 
 
 
@@ -67,17 +68,41 @@ export default function Dapp() {
   }, [data, isSuccess]);
 
   const FormComponent1 = () => (
-    <div className='relative z-10b bg-blue-900 w-3/6 h-min py-12 px-24 rounded-2xl flex flex-col'>
+    <div className='relative z-10 bg-blue-900 w-3/6 h-min py-12 px-24 rounded-2xl flex flex-col'>
       <img src="/My_project-1_(2).png" alt="Image 1" style={{ width: '70px', height: '70px', position: 'absolute', top: 0, left: 0 }} />
-      <h1>Form 1</h1>
+      <h1>Form 1 BOA</h1>
       {/* Form fields for Form 1 */}
       <form>
-        <input type="text" name="name" placeholder="Name" />
-        <input type="email" name="email" placeholder="Email" />
+        <input
+          type="text"
+          name="Deposit Address"
+          placeholder="Deposit Address"
+          value={receiverAddress}
+          onChange={onRecipientAddressChange}
+        />
+        <div className='flex space-x-4'>
+          <select
+            name="Deposit Token"
+            value={tokenType}
+            onChange={onTokenTypeChange}
+          >
+            {/* Your options here */}
+            <option value="token1">Token 1</option>
+            <option value="token2">Token 2</option>
+          </select>
+          <input
+            type="text"
+            name="Deposit Amount"
+            placeholder="Deposit Amount"
+            value={transferAmount}
+            onChange={onTransferAmountChange}
+          />
+        </div>
         <button>Submit Form 1</button>
       </form>
     </div>
   );
+  
   
   const FormComponent2 = () => (
     <div className='relative z-10 bg-slate-800 w-3/6 h-min py-12 px-24 rounded-2xl flex flex-col'>
@@ -115,6 +140,20 @@ export default function Dapp() {
   
   return (
     <div className='relative bg-slate-900 h-screen flex justify-center items-center flex-col space-y-50'>
+      <Head>
+        <title>Safi-Bridge</title>
+        <style>{`
+          @font-face {
+            font-family: 'SD Glitch 2';
+            src: url('/SdglitchdemoRegular-YzROj.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+            font-display: swap;
+          }
+        `}</style>
+      </Head>
+      <h1 style={{ fontFamily: "'SD Glitch 2'", fontSize: '8em', color: '#d90bc8', position: 'relative', zIndex: 1 }}>safi-bridge</h1>
+
       <video
         ref={videoRef}
         autoPlay
@@ -129,5 +168,6 @@ export default function Dapp() {
       <BlueButton />
       <FormComponent3 />
     </div>
-  )};
+  );
+}
   
