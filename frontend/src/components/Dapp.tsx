@@ -92,9 +92,18 @@ export default function Dapp() {
     </div>
   );
   
+  // Second blue button
+  const BlueButton = () => (
+    <button className="rounded-full p-4  bg-blue-500 text-white relative z-10">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="h-4 w-4 mx-auto">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+      </svg>
+    </button>
+  );
   
   const FormComponent3 = () => (
-    <div className='relative z-10 bg-slate-800 w-3/6 h-min py-12 px-24 rounded-2xl flex flex-col'>
+    <div className='relative z-10  bg-blue-900 w-3/6 h-min py-12 px-24 rounded-2xl flex flex-col'>
+      <img src="/My_project-1_(2).png" alt="Image 1" style={{ width: '70px', height: '70px', position: 'absolute', top: 0, left: 0 }} />
       <h1>Form 3</h1>
       {/* Form fields for Form 3 */}
       <form>
@@ -115,20 +124,10 @@ export default function Dapp() {
         src="/black_-_13495 (540p).mp4"
       />
       <FormComponent1 />
-      <button className="rounded-full p-4 bg-blue-500 text-white relative z-10">
-  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="h-6 w-6 mx-auto">
-    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-  </svg>
-</button>
-
-
-
-
-
-
+      <BlueButton />
       <FormComponent2 />
-      <div style={{ height: '20px' }} />
+      <BlueButton />
       <FormComponent3 />
     </div>
-  );
-}
+  )};
+  
