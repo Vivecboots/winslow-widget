@@ -58,6 +58,13 @@ export default function Dapp() {
     sendTransaction?.();
   }
 
+
+  const tokenLogos = {
+    'token1': '/Circle_USDC_Logo.svg-removebg-preview.png',
+    'token2': '/Tehter.png',
+    'token3': '/WETH.png',
+  };
+
   useEffect(() => {
     if (isSuccess) {
       addRecentTransaction({
@@ -74,49 +81,57 @@ export default function Dapp() {
     const buttons = [
       <Button key="token1" onClick={() => setTokenType('token1')}>USDC</Button>,
       <Button key="token2" onClick={() => setTokenType('token2')}>Tether</Button>,
-      <Button key="token3" onClick={() => setTokenType('token2')}>WETH</Button>,
+      <Button key="token3" onClick={() => setTokenType('token3')}>WETH</Button>,
     ];
+  
+    // Get the logo path for the currently selected token
+    const logoPath = tokenLogos[tokenType];
   
     return (
       <div className='relative z-10 bg-blue-900 w-3/6 h-min py-12 px-24 rounded-2xl flex flex-col'>
-        <img src="/My_project-1_(2).png" alt="Image 1" style={{ width: '85px', height: '85px', position: 'absolute', top: 0, left: 0 }} />
-        <h1>Form 1 BOA</h1>
-        {/* Form fields for Form 1 */}
+        <img src={logoPath} alt="Token Logo" style={{ width: '85px', height: '85px', marginRight: '10px' }} />
+         <img src="/My_project-1_(2).png" alt="Image 1" style={{ width: '85px', height: '85px', position: 'absolute', top: 0, left: 0 }} />
         <form>
-          <input
-            type="text"
-            name="Deposit Address"
-            placeholder="Deposit Address"
-            value={receiverAddress}
-            onChange={onRecipientAddressChange}
-            style={{ width: '100%' }} // Make input field long
-            maxLength={42} // Restrict input to 42 characters
-          />
-          <div className='flex space-x-4'>
-           
-
-
-            <ButtonGroup
-  disableElevation
-  variant="contained"
-  aria-label="Disabled elevation buttons"
-> {buttons}
-            </ButtonGroup>
-
-
+          <div style={{ display: 'flex', alignItems: 'center' }}>
+            <img src="/barcode-removebg-preview.png" alt="Logo" style={{  width: '65px', height: '60px', marginRight: '10px' }} />
             <input
               type="text"
-              name="Deposit Amount"
-              placeholder="Deposit Amount"
-              value={transferAmount}
-              onChange={onTransferAmountChange}
+              name="Deposit Address"
+              placeholder="Deposit Address"
+              value={receiverAddress}
+              onChange={onRecipientAddressChange}
+              style={{  height: '60px', width: '100%', backgroundColor: 'rgba(95, 98, 245)' }} // Add a background color
+              maxLength={42}
             />
           </div>
+          <ButtonGroup
+            disableElevation
+            style={{  height: '60px', width: '33%'}}
+            variant="contained"
+            aria-label="Disabled elevation buttons"
+          >
+            {buttons}
+          </ButtonGroup>
+          <input
+            type="text"
+            ///////////////////////////////////////////////////////////////////////////////
+            style={{  height: '60px', width: '66.6%', backgroundColor: 'rgba(95, 98, 245)'}}
+            
+            name="Deposit Amount"
+            placeholder="Deposit Amount"
+            value={transferAmount}
+            onChange={onTransferAmountChange}
+          />
           <button>Submit Form 1</button>
         </form>
       </div>
     );
-  }
+  };
+  
+           
+
+
+          
   
   
   const FormComponent2 = () => (
@@ -169,7 +184,7 @@ export default function Dapp() {
       </Head>
       
       <div style={{ backgroundColor: 'rgba(0, 0, 0, 0)', padding: '20px', borderRadius: '10px', width: '50%', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', zIndex: 10 }}>
-  <h1 style={{ fontFamily: "'SD Glitch 2'", fontSize: '8em', color: '#fc03ce', position: 'relative', zIndex: 11 }}>Supra-Bridge</h1>
+  <h1 style={{ fontFamily: "'SD Glitch 2'", fontSize: '10em', color: '#fc03ce', position: 'relative', zIndex: 11 }}>Supra-Bridge</h1>
  
 </div>
 
