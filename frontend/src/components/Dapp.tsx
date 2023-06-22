@@ -9,6 +9,8 @@ import zIndex from '@mui/material/styles/zIndex';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import InputLabel from '@mui/material/InputLabel';
 import FormControl from '@mui/material/FormControl';
+import TokenDropdown from './TokenDropdown';
+
 
 
 export default function Dapp() {
@@ -178,25 +180,41 @@ export default function Dapp() {
           
   
   
-  const FormComponent2 = () => (
-    <div className='relative z-10 bg-slate-800 w-3/6 h-min py-12 px-24 rounded-2xl flex flex-col'>
-      <img src="/My_project-1_(4).png" alt="Image 2" style={{ width: '85px', height: '85px', position: 'absolute', top: 0, left: 0 }}  />
-      <h1>Form 2</h1>
-      {/* Form fields for Form 2 */}
-      <form>
-        <select onChange={onTokenTypeChange}>
-          {tokens.map(token => (
-            <option key={token.symbol} value={token.address}>
-              {token.symbol}
-            </option>
-          ))}
-        </select>
-        <input type="text" name="username" placeholder="Username" />
-        <input type="password" name="password" placeholder="Password" />
-        <button>Submit Form 2</button>
-      </form>
-    </div>
-  );
+  const FormComponent2 = () => {
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
+  
+    const handleUsernameChange = (e) => {
+      setUsername(e.target.value);
+    };
+  
+    const handlePasswordChange = (e) => {
+      setPassword(e.target.value);
+    };
+  
+    const handleSubmit = (e) => {
+      e.preventDefault();
+      // Logic for submitting the form goes here
+    };
+  
+    return (
+      <div className="relative z-10 bg-slate-800 w-3/6 h-min py-12 px-24 rounded-2xl flex flex-col">
+        <img
+          src="/My_project-1_(4).png"
+          alt="Image 2"
+          style={{ width: '85px', height: '85px', position: 'absolute', top: 0, left: 0 }}
+        />
+        <h1>Form 2</h1>
+        {/* Form fields for Form 2 */}
+        <form onSubmit={handleSubmit}>
+          <TokenDropdown onChange={onTokenTypeChange} />
+          <input type="text" name="username" placeholder="Username" value={username} onChange={handleUsernameChange} />
+          <input type="password" name="password" placeholder="Password" value={password} onChange={handlePasswordChange} />
+          <button type="submit">Submit Form 2</button>
+        </form>
+      </div>
+    );
+  };
   
   
   // Second blue button
