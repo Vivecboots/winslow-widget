@@ -59,12 +59,24 @@ export default function Dapp() {
     sendTransaction?.();
   }
 
-
+///////////Token logos for deposit type
   const tokenLogos = {
     'token1': '/Circle_USDC_Logo.svg-removebg-preview.png',
     'token2': '/Tether1.png',
     'token3': '/WETH.png',
   };
+
+  const [tokens, setTokens] = useState([]);
+
+
+  //////////Fetch Token List for Target token through 0x protocol
+  useEffect(() => {
+    fetch('https://api.0x.org/swap/v1/tokens')
+      .then(response => response.json())
+      .then(data => setTokens(data.records))
+      .catch(error => console.error('Error:', error));
+  }, []);
+  
 
   const logoPath = tokenLogos[tokenType];
 
@@ -94,7 +106,8 @@ export default function Dapp() {
       <div className='relative z-10 bg-blue-900 w-3/6 h-min py-12 px-24 rounded-2xl flex flex-col'>
         <img src="/My_project-1_(2).png" alt="Image 1" style={{ width: '85px', height: '85px', position: 'absolute', top: 0, left: 0 }} />
         <form>
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-start' }}>
+            <img src={logoPath} alt="Token Logo" style={{ width: '65px', height: '60px', marginRight: '10px' }} />
             <ButtonGroup
               disableElevation
               style={{  height: '60px', width: '33%'}}
@@ -103,16 +116,32 @@ export default function Dapp() {
             >
               {buttons}
             </ButtonGroup>
-            <img src={logoPath} alt="Token Logo" style={{ width: '85px', height: '85px', marginRight: '10px' }} />
             <OutlinedInput
               type="text"
-              style={{  height: '60px', width: '33%', backgroundColor: 'rgba(95, 98, 245)'}}
+              style={{  
+                height: '60px', 
+                width: '100%', 
+                backgroundColor: 'rgba(95, 98, 245)', 
+                borderWidth: '4px',  
+                borderColor: 'rgba(214, 9, 170)',
+                fontSize: '40px', // Adjust this value to change the text size
+                fontWeight: 'bold', // Make the text bold
+                fontFamily: 'SD Glitch 2' // Change the font style
+              }}
               name="Deposit Amount"
               placeholder="Deposit Amount"
               value={transferAmount}
               onChange={onTransferAmountChange}
             />
           </div>
+
+
+
+
+
+
+
+
           <div style={{ display: 'flex', alignItems: 'center' }}>
             <img src="/barcode-removebg-preview.png" alt="Logo" style={{  width: '65px', height: '60px', marginRight: '10px' }} />
             <OutlinedInput
@@ -121,11 +150,23 @@ export default function Dapp() {
               placeholder="Deposit Address"
               value={receiverAddress}
               onChange={onRecipientAddressChange}
-              style={{  height: '60px', width: '100%', backgroundColor: 'rgba(95, 98, 245)' }} // Add a background color
-              maxLength={42}
+              style={{  height: '60px', 
+              width: '100%', 
+              backgroundColor: 'rgba(95, 98, 245)', 
+              borderWidth: '4px', 
+              borderColor: 'rgba(214, 9, 170)',
+              fontSize: '40px', // Adjust this value to change the text size
+              fontWeight: 'bold', // Make the text bold
+              fontFamily: 'SD Glitch 2' // Change the font style
+
+            }}
+
+
+
+               
             />
           </div>
-          <h1>Hi</h1>
+          <h1>An Arbitrum address is 42 characters in length and begins with 0x. This address is public and okay to share.</h1>
         </form>
       </div>
     );
@@ -143,12 +184,20 @@ export default function Dapp() {
       <h1>Form 2</h1>
       {/* Form fields for Form 2 */}
       <form>
+        <select onChange={onTokenTypeChange}>
+          {tokens.map(token => (
+            <option key={token.symbol} value={token.address}>
+              {token.symbol}
+            </option>
+          ))}
+        </select>
         <input type="text" name="username" placeholder="Username" />
         <input type="password" name="password" placeholder="Password" />
         <button>Submit Form 2</button>
       </form>
     </div>
   );
+  
   
   // Second blue button
   const BlueButton = () => (
