@@ -19,7 +19,8 @@ export default function Dapp() {
   const [userNonce, setUserNonce] = useState<number>(0);
   const [maxPrice, setMaxPrice] = useState<number>(0);
   const [timeLimit, setTimeLimit] = useState<number>(0);
-  const [tokenType, setTokenType] = useState<string>('token2'); // Set default to Tether
+  const [tokenTypeForm1, setTokenTypeForm1] = useState<string>('token2'); // Set default to Tether, THIS IS FOR FORM 1 ONLY
+
 
   const addRecentTransaction = useAddRecentTransaction();
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -44,8 +45,8 @@ export default function Dapp() {
     setTimeLimit(Number(e.target.value));
   }
 
-  const onTokenTypeChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setTokenType(e.target.value);
+  const onTokenTypeChangeForm1 = (e: ChangeEvent<HTMLInputElement>) => {
+    setTokenTypeForm1(e.target.value);
   }
 
   const { config, error } = usePrepareSendTransaction({
@@ -60,6 +61,10 @@ export default function Dapp() {
   const handleSendTransaction = async () => {
     sendTransaction?.();
   }
+
+
+  const [tokenTypeForm2, setTokenTypeForm2] = useState<string>('');
+
 
 ///////////Token logos for deposit type
   const tokenLogos = {
@@ -80,7 +85,9 @@ export default function Dapp() {
   }, []);
   
 
-  const logoPath = tokenLogos[tokenType];
+  const logoPath = tokenLogos[tokenTypeForm2];
+
+
 
   useEffect(() => {
     if (isSuccess) {
@@ -96,13 +103,14 @@ export default function Dapp() {
 
   const FormComponent1 = () => {
     const buttons = [
-      <Button key="token1" onClick={() => setTokenType('token1')}>USDC</Button>,
-      <Button key="token2" onClick={() => setTokenType('token2')}>Tether</Button>,
-      <Button key="token3" onClick={() => setTokenType('token3')}>WETH</Button>,
+      <Button key="token1" onClick={() => setTokenTypeForm1('token1')}>USDC</Button>,
+      <Button key="token2" onClick={() => setTokenTypeForm1('token2')}>Tether</Button>,
+      <Button key="token3" onClick={() => setTokenTypeForm1('token3')}>WETH</Button>,
     ];
   
     // Get the logo path for the currently selected token
-    const logoPath = tokenLogos[tokenType];
+    const logoPath = tokenLogos[tokenTypeForm1];
+
   
     return (
       <div className='relative z-10 bg-blue-900 w-3/6 h-min py-12 px-24 rounded-2xl flex flex-col'>
@@ -197,8 +205,15 @@ export default function Dapp() {
       // Logic for submitting the form goes here
     };
   
+    const handleTokenTypeChange = (selectedOption: any) => {
+      setTokenTypeForm2(selectedOption.value);
+    };
+  
     return (
       <div className="relative z-10 bg-slate-800 w-3/6 h-min py-12 px-24 rounded-2xl flex flex-col">
+
+        {/* ... */}
+        
         <img
           src="/My_project-1_(4).png"
           alt="Image 2"
@@ -207,7 +222,8 @@ export default function Dapp() {
         <h1>Form 2</h1>
         {/* Form fields for Form 2 */}
         <form onSubmit={handleSubmit}>
-          <TokenDropdown onChange={onTokenTypeChange} />
+          
+        <TokenDropdown onChange={handleTokenTypeChange} />
           <input type="text" name="username" placeholder="Username" value={username} onChange={handleUsernameChange} />
           <input type="password" name="password" placeholder="Password" value={password} onChange={handlePasswordChange} />
           <button type="submit">Submit Form 2</button>
