@@ -30,3 +30,6 @@ select:-webkit-autofill:focus {
   font-display: swap;
 }
 
+.my-dropdown {
+  z-index: 9999 !important; /* adjust this value as needed */
+}

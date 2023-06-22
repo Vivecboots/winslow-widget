@@ -1,25 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import Select from 'react-select';
 
-interface Token {
-  symbol: string;
-  name: string;
-  logoURI: string;
-}
-
-interface TokenDropdownProps {
-  onChange: (selectedOption: any) => void;
-}
-
-const formatOptionLabel = ({ data }: { data: Token }) => (
-  <div style={{ display: 'flex', alignItems: 'center' }}>
-    <img src={data.logoURI} alt={data.name} style={{ width: '20px', height: '20px', marginRight: '10px' }} />
-    <span>{data.name}</span>
-  </div>
-);
-
-const TokenDropdown: React.FC<TokenDropdownProps> = ({ onChange }) => {
-  const [tokenList, setTokenList] = useState<Token[]>([]);
+function TokenDropdown({ onChange }) {
+  const [tokenList, setTokenList] = useState([]);
+  const [menuPortalTarget, setMenuPortalTarget] = useState(null);
 
   useEffect(() => {
     fetch('https://tokens.coingecko.com/uniswap/all.json')
@@ -32,20 +16,30 @@ const TokenDropdown: React.FC<TokenDropdownProps> = ({ onChange }) => {
       });
   }, []);
 
-  const options = tokenList.map(token => ({
-    value: token.symbol,
-    label: token.name,
-    data: token, // Pass the entire token object as the data property
-  }));
+  useEffect(() => {
+    setMenuPortalTarget(document.body);
+  }, []);
+
+  const handleChange = (selectedOption) => {
+    onChange({ target: { value: selectedOption.value } });
+  };
 
   return (
     <Select
-      options={options}
-      onChange={onChange}
-      isSearchable
-      placeholder="Select a token"
-      formatOptionLabel={formatOptionLabel} // Add logos
-    />
+  className="my-dropdown"
+  onChange={handleChange}
+  options={tokenList.map(token => ({
+    value: token.symbol,
+    label: (
+      <div style={{ display: 'flex', alignItems: 'center' }}>
+        <img src={token.logoURI} alt={token.symbol} style={{ width: '20px', marginRight: '5px', zIndex: 999 }} />
+        {token.name}
+      </div>
+    ),
+  }))}
+  menuPortalTarget={menuPortalTarget}
+  menuPosition={'fixed'} // optionally, you can use "absolute"
+/>
   );
 }
 

@@ -13,6 +13,7 @@ import TokenDropdown from './TokenDropdown';
 
 
 
+
 export default function Dapp() {
   const [receiverAddress, setReceiverAddress] = useState<string>("");
   const [transferAmount, setTransferAmout] = useState<string>("0");
@@ -76,13 +77,6 @@ export default function Dapp() {
   const [tokens, setTokens] = useState([]);
 
 
-  //////////Fetch Token List for Target token through 0x protocol
-  useEffect(() => {
-    fetch('https://api.0x.org/swap/v1/tokens')
-      .then(response => response.json())
-      .then(data => setTokens(data.records))
-      .catch(error => console.error('Error:', error));
-  }, []);
   
 
   const logoPath = tokenLogos[tokenTypeForm2];
@@ -210,22 +204,20 @@ export default function Dapp() {
     };
   
     return (
-      <div className="relative z-10 bg-slate-800 w-3/6 h-min py-12 px-24 rounded-2xl flex flex-col">
-
+      <div className='relative z-100 bg-blue-900 w-3/6 h-min py-12 px-24 rounded-2xl flex flex-col'>
         {/* ... */}
-        
         <img
           src="/My_project-1_(4).png"
           alt="Image 2"
-          style={{ width: '85px', height: '85px', position: 'absolute', top: 0, left: 0 }}
+          style={{ width: '85px', height: '85px', position: 'absolute', top: 0, left: 0, zIndex: 10000 }}
         />
         <h1>Form 2</h1>
         {/* Form fields for Form 2 */}
         <form onSubmit={handleSubmit}>
+          <div style={{ position: 'relative', zIndex: 10001 }}>
+            <TokenDropdown onChange={handleTokenTypeChange} />
+          </div>
           
-        <TokenDropdown onChange={handleTokenTypeChange} />
-          <input type="text" name="username" placeholder="Username" value={username} onChange={handleUsernameChange} />
-          <input type="password" name="password" placeholder="Password" value={password} onChange={handlePasswordChange} />
           <button type="submit">Submit Form 2</button>
         </form>
       </div>
@@ -233,9 +225,10 @@ export default function Dapp() {
   };
   
   
+  
   // Second blue button
   const BlueButton = () => (
-    <button className="rounded-full p-4  bg-blue-500 text-white relative z-10">
+    <button className="rounded-full p-4  bg-blue-500 text-white relative z-8" >
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="h-4 w-4 mx-auto">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
       </svg>
@@ -243,7 +236,7 @@ export default function Dapp() {
   );
   
   const FormComponent3 = () => (
-    <div className='relative z-10  bg-blue-900 w-3/6 h-min py-12 px-24 rounded-2xl flex flex-col'>
+    <div className='relative z-9  bg-blue-900 w-3/6 h-min py-12 px-24 rounded-2xl flex flex-col'>
       <img src="/My_project-1_(2).png" alt="Image 1" style={{ width: '85px', height: '85px', position: 'absolute', top: 0, left: 0 }} />
       <h1>Form 3</h1>
       {/* Form fields for Form 3 */}
@@ -255,7 +248,7 @@ export default function Dapp() {
   );
   
   return (
-    <div className='relative bg-slate-900 h-screen flex justify-center items-center flex-col space-y-50'>
+    <div className='relative bg-slate-900 h-screen flex justify-center items-center flex-col space-y-50' >
       <Head>
         <title>Safi-Bridge</title>
         <style>{`
