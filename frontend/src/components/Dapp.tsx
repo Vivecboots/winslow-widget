@@ -61,7 +61,7 @@ export default function Dapp() {
 
   const tokenLogos = {
     'token1': '/Circle_USDC_Logo.svg-removebg-preview.png',
-    'token2': '/Tehter.png',
+    'token2': '/Tether1.png',
     'token3': '/WETH.png',
   };
 
