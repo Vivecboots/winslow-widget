@@ -7,7 +7,8 @@ import ButtonGroup from '@mui/material/ButtonGroup';
 import Button from '@mui/material/Button';
 import zIndex from '@mui/material/styles/zIndex';
 import OutlinedInput from '@mui/material/OutlinedInput';
-
+import InputLabel from '@mui/material/InputLabel';
+import FormControl from '@mui/material/FormControl';
 
 
 export default function Dapp() {
@@ -16,7 +17,7 @@ export default function Dapp() {
   const [userNonce, setUserNonce] = useState<number>(0);
   const [maxPrice, setMaxPrice] = useState<number>(0);
   const [timeLimit, setTimeLimit] = useState<number>(0);
-  const [tokenType, setTokenType] = useState<string>('');
+  const [tokenType, setTokenType] = useState<string>('token2'); // Set default to Tether
 
   const addRecentTransaction = useAddRecentTransaction();
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -64,6 +65,8 @@ export default function Dapp() {
     'token2': '/Tether1.png',
     'token3': '/WETH.png',
   };
+
+  const logoPath = tokenLogos[tokenType];
 
   useEffect(() => {
     if (isSuccess) {
