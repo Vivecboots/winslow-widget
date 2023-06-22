@@ -6,7 +6,7 @@ import Head from 'next/head';
 import ButtonGroup from '@mui/material/ButtonGroup';
 import Button from '@mui/material/Button';
 import zIndex from '@mui/material/styles/zIndex';
-
+import OutlinedInput from '@mui/material/OutlinedInput';
 
 
 
@@ -89,12 +89,30 @@ export default function Dapp() {
   
     return (
       <div className='relative z-10 bg-blue-900 w-3/6 h-min py-12 px-24 rounded-2xl flex flex-col'>
-        <img src={logoPath} alt="Token Logo" style={{ width: '85px', height: '85px', marginRight: '10px' }} />
-         <img src="/My_project-1_(2).png" alt="Image 1" style={{ width: '85px', height: '85px', position: 'absolute', top: 0, left: 0 }} />
+        <img src="/My_project-1_(2).png" alt="Image 1" style={{ width: '85px', height: '85px', position: 'absolute', top: 0, left: 0 }} />
         <form>
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+            <ButtonGroup
+              disableElevation
+              style={{  height: '60px', width: '33%'}}
+              variant="contained"
+              aria-label="Disabled elevation buttons"
+            >
+              {buttons}
+            </ButtonGroup>
+            <img src={logoPath} alt="Token Logo" style={{ width: '85px', height: '85px', marginRight: '10px' }} />
+            <OutlinedInput
+              type="text"
+              style={{  height: '60px', width: '33%', backgroundColor: 'rgba(95, 98, 245)'}}
+              name="Deposit Amount"
+              placeholder="Deposit Amount"
+              value={transferAmount}
+              onChange={onTransferAmountChange}
+            />
+          </div>
           <div style={{ display: 'flex', alignItems: 'center' }}>
             <img src="/barcode-removebg-preview.png" alt="Logo" style={{  width: '65px', height: '60px', marginRight: '10px' }} />
-            <input
+            <OutlinedInput
               type="text"
               name="Deposit Address"
               placeholder="Deposit Address"
@@ -104,25 +122,7 @@ export default function Dapp() {
               maxLength={42}
             />
           </div>
-          <ButtonGroup
-            disableElevation
-            style={{  height: '60px', width: '33%'}}
-            variant="contained"
-            aria-label="Disabled elevation buttons"
-          >
-            {buttons}
-          </ButtonGroup>
-          <input
-            type="text"
-            ///////////////////////////////////////////////////////////////////////////////
-            style={{  height: '60px', width: '66.6%', backgroundColor: 'rgba(95, 98, 245)'}}
-            
-            name="Deposit Amount"
-            placeholder="Deposit Amount"
-            value={transferAmount}
-            onChange={onTransferAmountChange}
-          />
-          <button>Submit Form 1</button>
+          <h1>Hi</h1>
         </form>
       </div>
     );
