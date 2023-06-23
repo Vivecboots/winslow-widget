@@ -128,7 +128,7 @@ export default function Dapp() {
                 backgroundColor: 'rgba(95, 98, 245)', 
                 borderWidth: '4px',  
                 borderColor: 'rgba(214, 9, 170)',
-                fontSize: '40px', // Adjust this value to change the text size
+                fontSize: '30px', // Adjust this value to change the text size
                 fontWeight: 'bold', // Make the text bold
                 fontFamily: 'SD Glitch 2' // Change the font style
               }}
@@ -159,7 +159,7 @@ export default function Dapp() {
               backgroundColor: 'rgba(95, 98, 245)', 
               borderWidth: '4px', 
               borderColor: 'rgba(214, 9, 170)',
-              fontSize: '40px', // Adjust this value to change the text size
+              fontSize: '23px', // Adjust this value to change the text size
               fontWeight: 'bold', // Make the text bold
               fontFamily: 'SD Glitch 2' // Change the font style
 
@@ -170,13 +170,13 @@ export default function Dapp() {
                
             />
           </div>
-          <h1>An Arbitrum address is 42 characters in length and begins with 0x. This address is public and okay to share.</h1>
+          <h1 style={{ color: 'white', fontWeight: 'italic' }}> An Arbitrum address is 42 characters in length and begins with 0x. This address is public and okay to share.</h1>
         </form>
       </div>
     );
   };
   
-           
+  
 
 
           
@@ -200,8 +200,9 @@ export default function Dapp() {
     };
   
     const handleTokenTypeChange = (selectedOption: any) => {
-      setTokenTypeForm2(selectedOption.value);
+      setTokenTypeForm2(selectedOption.target.value.address);
     };
+    
   
     return (
       <div className='relative z-100 bg-blue-900 w-3/6 h-min py-12 px-24 rounded-2xl flex flex-col'>
