@@ -106,7 +106,7 @@ export default function Dapp() {
 
   
     return (
-      <div className='relative z-10 bg-blue-900 w-3/6 h-min py-12 px-24 rounded-2xl flex flex-col'>
+      <div className='relative z-10 bg-blue-900 bg-opacity-75 w-3/6 h-min py-12 px-24 rounded-2xl flex flex-col'>
         <img src="/My_project-1_(2).png" alt="Image 1" style={{ width: '85px', height: '85px', position: 'absolute', top: 0, left: 0 }} />
         <form>
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-start' }}>
@@ -204,7 +204,7 @@ export default function Dapp() {
     
   
     return (
-      <div className='relative z-100 bg-blue-900 w-3/6 h-min py-12 px-24 rounded-2xl flex flex-col'>
+      <div className='relative z-100,  bg-slate-700 bg-opacity-60 w-3/6 h-min py-12 px-24 rounded-2xl flex flex-col'>
         {/* ... */}
         <img
           src="/My_project-1_(4).png"
@@ -228,7 +228,7 @@ export default function Dapp() {
   
   // Second blue button
   const BlueButton = () => (
-    <button className="rounded-full p-4  bg-blue-500 text-white relative z-8" >
+    <button className="rounded-full p-4  bg-blue-500 bg-opacity-85 text-white relative z-8" >
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="h-4 w-4 mx-auto">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
       </svg>
@@ -236,7 +236,7 @@ export default function Dapp() {
   );
   
   const FormComponent3 = () => (
-    <div className='relative z-9  bg-blue-900 w-3/6 h-min py-12 px-24 rounded-2xl flex flex-col'>
+    <div className='relative z-9 bg-opacity-75 bg-blue-900 w-3/6 h-min py-12 px-24 rounded-2xl flex flex-col'>
       <img src="/My_project-1_(2).png" alt="Image 1" style={{ width: '85px', height: '85px', position: 'absolute', top: 0, left: 0 }} />
       <h1>Form 3</h1>
       {/* Form fields for Form 3 */}
