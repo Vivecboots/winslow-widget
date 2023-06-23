@@ -79,8 +79,7 @@ export default function Dapp() {
 
   
 
-  const logoPath = tokenLogos[tokenTypeForm2];
-
+  
 
 
   useEffect(() => {

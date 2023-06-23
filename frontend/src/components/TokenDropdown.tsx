@@ -77,9 +77,26 @@ function TokenDropdown({ onChange }) {
   };
   
 
-  return (
+ // New state variables for the order type and minimum entry price
+ const [orderType, setOrderType] = useState(null);
+ const [minEntryPrice, setMinEntryPrice] = useState('');
+
+ // New handler functions for the order type and minimum entry price
+ const handleOrderTypeChange = (selectedOption) => {
+   setOrderType(selectedOption);
+ };
+
+ const handleMinEntryPriceChange = (event) => {
+   setMinEntryPrice(event.target.value);
+ };
+
+
+
+ return (
+  <div>
     <div style={{ display: 'flex' }}>
-      <div style={{ flex: 1,  }}>
+      {/* Existing dropdown and input box... */}
+      <div style={{ flex: 1 }}>
         <Select
           className="my-dropdown"
           value={selectedToken}
@@ -110,13 +127,47 @@ function TokenDropdown({ onChange }) {
             borderColor: 'rgba(214, 9, 170)',
             height: '60px',
             fontSize: '23px', // Adjust this value to change the text size
-              fontWeight: 'bold', // Make the text bold
-              fontFamily: 'SD Glitch 2' // Change the font style
+            fontWeight: 'bold', // Make the text bold
+            fontFamily: 'SD Glitch 2' // Change the font style
           }}
         />
       </div>
     </div>
-  );
+    <div style={{ display: 'flex', marginTop: '10px' }}> {/* Add margin for spacing */}
+      <div style={{ flex: 1 }}>
+        <Select
+          value={orderType}
+          onChange={handleOrderTypeChange}
+          options={[
+            { value: 'limit', label: 'Limit Order' },
+            { value: 'market', label: 'Market Order' },
+          ]}
+          menuPortalTarget={menuPortalTarget}
+          menuPosition={'fixed'}
+          styles={customStyles}
+        />
+      </div>
+      <div style={{ flex: 1 }}>
+        <input
+          type="text"
+          value={minEntryPrice}
+          onChange={handleMinEntryPriceChange}
+          placeholder="Minimum entry price"
+          style={{
+            width: '100%',
+            backgroundColor: 'rgba(95, 98, 245)',
+            borderWidth: '4px',
+            borderColor: 'rgba(214, 9, 170)',
+            height: '60px',
+            fontSize: '23px',
+            fontWeight: 'bold',
+            fontFamily: 'SD Glitch 2'
+          }}
+        />
+      </div>
+    </div>
+  </div>
+);
 }
 
 export default TokenDropdown;
