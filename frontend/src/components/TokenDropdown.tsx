@@ -62,19 +62,24 @@ function TokenDropdown({ onChange }) {
       display: 'flex',
       alignItems: 'center',
     }),
-    option: (provided) => ({
-      ...provided,
-      color: 'white', // Set the option text color to white
-    }),
     menuPortal: (provided) => ({
       ...provided,
       zIndex: 9999,
     }),
+    option: (provided, state) => ({
+      ...provided,
+      color: state.isSelected ? 'white' : 'black', // Set the selected option text color to white and other options to black
+    }),
+    singleValue: (provided) => ({
+      ...provided,
+      color: 'white', // Set the selected value text color to white
+    }),
   };
   
+
   return (
     <div style={{ display: 'flex' }}>
-      <div style={{ flex: 1 }}>
+      <div style={{ flex: 1,  }}>
         <Select
           className="my-dropdown"
           value={selectedToken}
